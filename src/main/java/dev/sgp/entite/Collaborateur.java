@@ -5,14 +5,14 @@ import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
 public class Collaborateur {
-	private Integer id;
+	private String matricule;
 	private String nom;
 	private String prenom;
 	private String adresse;
 	private String numeroSecu;
 	private LocalDate dateNaissance;
-	private String fonction;
-	private String departement;
+	private String intitulePoste;
+	private Departement departement;
 	private String email;
 	private String telephone;
 	private ZonedDateTime dateCreation;
@@ -20,16 +20,18 @@ public class Collaborateur {
 	private boolean actif;
 	
 	private final String NON_RENSEIGNE="Non renseigné";
+	private Integer CPT = 0;
 	
-	public Collaborateur(Integer id, String nom, String prenom, String adresse, String numeroSecu, LocalDate dateNaissance) {
-		this.id = id;
+	public Collaborateur(String nom, String prenom, String adresse, String numeroSecu, LocalDate dateNaissance) {
+		CPT++;
+		this.matricule = "M"+CPT;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.numeroSecu = numeroSecu;
 		this.dateNaissance = dateNaissance;
-		this.fonction = NON_RENSEIGNE;
-		this.departement = NON_RENSEIGNE;
+		this.intitulePoste = NON_RENSEIGNE;
+		this.departement = new Departement(NON_RENSEIGNE);
 		this.telephone =NON_RENSEIGNE;
 		this.email=prenom+"."+nom+"@"+ResourceBundle.getBundle("application").getString("email_societe");;
 		this.dateCreation= ZonedDateTime.now();
@@ -39,15 +41,15 @@ public class Collaborateur {
 	/**Getter for id
 	 * @return id
 	 */
-	public Integer getId() {
-		return id;
+	public String getMatricule() {
+		return matricule;
 	}
 
 	/**
 	 * @param matricule the id to set
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setMatricule(String id) {
+		this.matricule = matricule;
 	}
 
 	/**Getter for nom
@@ -123,28 +125,28 @@ public class Collaborateur {
 	/**Getter for fonction
 	 * @return fonction
 	 */
-	public String getFonction() {
-		return fonction;
+	public String getIntitulePoste() {
+		return intitulePoste;
 	}
 
 	/**
 	 * @param fonction the fonction to set
 	 */
-	public void setFonction(String fonction) {
-		this.fonction = fonction;
+	public void setIntitulePoste(String intitulePoste) {
+		this.intitulePoste = intitulePoste;
 	}
 
 	/**Getter for departement
 	 * @return departement
 	 */
-	public String getDepartement() {
+	public Departement getDepartement() {
 		return departement;
 	}
 
 	/**
 	 * @param departement the departement to set
 	 */
-	public void setDepartement(String departement) {
+	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
 
@@ -202,6 +204,18 @@ public class Collaborateur {
 	 */
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+	/**Getter for actif
+	 * @return actif
+	 */
+	public boolean isActif() {
+		return actif;
+	}
+	/**
+	 * @param actif the actif to set
+	 */
+	public void setActif(boolean actif) {
+		this.actif = actif;
 	}
 	
 
