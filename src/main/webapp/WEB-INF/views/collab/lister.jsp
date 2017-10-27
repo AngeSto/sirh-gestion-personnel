@@ -1,6 +1,6 @@
 <%@ page import="java.util.List"%>
-<%@ page import="dev.sgp.model.Collaborateurs"%>
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page import="dev.sgp.entite.Collaborateur"%>
+<%@ page language="java" pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!doctype html>
 <html>
 
@@ -47,7 +47,7 @@
 		</div>
 	</nav>
 	<div class="offset-10">
-		<a class="btn btn-primary" href="./nouveau.html" role="button">Ajouter
+		<a class="btn btn-primary" href="./nouveau" role="button">Ajouter
 			un nouveau collaborateur</a>
 	</div>
 	<header>
@@ -95,9 +95,9 @@
 	</form>
 	<section class="container-fluid">
 		<%
-			List<Collaborateurs> listCollabo = (List<Collaborateurs>) request.getAttribute("listCollabo");
+			List<Collaborateur> listCollabo = (List<Collaborateur>) request.getAttribute("listCollabo");
 			int cpt = 0;
-			for (Collaborateurs collabo : listCollabo) {
+			for (Collaborateur collabo : listCollabo) {
 				if (cpt % 3 == 0 || cpt == 0) {
 		%>
 		<div class="row">
@@ -110,24 +110,24 @@
 					<div class="card-block">
 						<div class="media">
 							<img class="d-flex align-self-center mr-3" height="100"
-								src="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg"
+								src="<%=collabo.getPhoto() %>"
 								alt="Generic placeholder image">
 							<div class="media-body">
 								<div class="row">
-									<p class="col-6 font-weight-bold">Fonction</p>
-									<p class="col=5"><%=collabo.getFonction()%></p>
+									<p class="col-5 font-weight-bold">Fonction</p>
+									<p class="col=7"><%=collabo.getFonction()%></p>
 								</div>
 								<div class="row">
-									<p class="col-6 font-weight-bold">Departement</p>
-									<p class="col=5"><%=collabo.getDepartement()%></p>
+									<p class="col-5 font-weight-bold">Departement</p>
+									<p class="col=7"><%=collabo.getDepartement()%></p>
 								</div>
 								<div class="row">
-									<p class="col-6 font-weight-bold">Email</p>
-									<p class="col=5"><%=collabo.getEmail()%></p>
+									<p class="col-5 font-weight-bold">Email</p>
+									<p class="col=7"><%=collabo.getEmail()%></p>
 								</div>
 								<div class="row ">
-									<p class="col-6 font-weight-bold">Téléphone</p>
-									<p class="col=5"><%=collabo.getTelephone()%></p>
+									<p class="col-5 font-weight-bold">Téléphone</p>
+									<p class="col=7"><%=collabo.getTelephone()%></p>
 								</div>
 								<div class="row">
 									<a href="./creer.html" class="btn btn-primary offset-7 col-4">Editer</a>

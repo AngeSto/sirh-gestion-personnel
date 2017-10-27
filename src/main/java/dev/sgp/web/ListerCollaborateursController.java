@@ -9,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dev.sgp.model.Collaborateurs;
+import dev.sgp.entite.Collaborateur;
+import dev.sgp.service.CollaborateurService;
+import dev.sgp.util.Constantes;
 
 public class ListerCollaborateursController extends HttpServlet {
-
+	private CollaborateurService collaboService = Constantes.COLLAB_SERVICE;
 	@Override
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		List<Collaborateurs> list = new ArrayList<>();
-		list.add(new Collaborateurs("Stoïanov", "Ange", "Développeur", "Informatique", "emailAnge@hotmail.fr", "06 96 30 98 18"));
-		list.add(new Collaborateurs("Feuillerat", "Paloma", "Femme au foyer", "Maison", "emailPaloma@yahoo.com", "07 52 87 96 87"));
-		list.add(new Collaborateurs("Stoïanov", "Ange", "Développeur", "Informatique", "emailAnge@hotmail.fr", "06 96 30 98 18"));
-		list.add(new Collaborateurs("Feuillerat", "Paloma", "Femme au foyer", "Maison", "emailPaloma@yahoo.com", "07 52 87 96 87"));
+		List<Collaborateur> list = collaboService.listerCollabo();
 		req.setAttribute("listCollabo", list);
 		req.getRequestDispatcher("/WEB-INF/views/collab/lister.jsp").forward(req, resp);
-		
 	}
 }
