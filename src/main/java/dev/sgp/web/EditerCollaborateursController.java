@@ -1,41 +1,57 @@
 package dev.sgp.web;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dev.sgp.entite.Collaborateur;
+import dev.sgp.entite.Departement;
+import dev.sgp.service.CollaborateurService;
+import dev.sgp.service.DepartementService;
+import dev.sgp.util.Constantes;
+
 public class EditerCollaborateursController extends HttpServlet {
+	private CollaborateurService collaboService = Constantes.COLLAB_SERVICE;
+	private DepartementService departService = Constantes.DEPART_SERVICE;
+
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		List<Collaborateur> list = collaboService.listerCollabo();
+		Optional<Collaborateur> optional = list.stream().filter(collabo -> collabo.getMatricule().equals(req.getParameter("matricule"))).findFirst();
+		if (optional.isPresent()){
+			Collaborateur collabo = optional.get();
+			req.setAttribute("Collabo", collabo);
+			req.setAttribute("listDepart", departService.listerDepartement());
+		}
+		req.getRequestDispatcher("/WEB-INF/views/collab/editer.jsp").forward(req, resp);
+	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		String matricule = req.getParameter("matricule");
-		String titre = req.getParameter("titre");
-		String nom = req.getParameter("nom");
-		String prenom = req.getParameter("prenom");
-		StringBuilder sB = new StringBuilder();
-		if (matricule == null || titre == null || nom == null || prenom == null) {
-			resp.setStatus(400);
-			sB.append("Le attribut suivant ne sont pas renseigné :");
-			if (matricule == null){
-				sB.append("\n le matricule");
+		List<Collaborateur> list = collaboService.listerCollabo();
+		List<Departement> listDepart = departService.listerDepartement();
+		Optional<Collaborateur> optional = list.stream().filter(collabo -> collabo.getMatricule().equals(req.getParameter("Matricule"))).findFirst();
+		if (optional.isPresent()){
+			Collaborateur collabo = optional.get();
+			collabo.setAdresse(req.getParameter("Adresse"));
+			collabo.setTelephone(req.getParameter("Telephone"));
+			Optional<Departement> departement= listDepart.stream().filter(depart -> depart.getNom().equals(req.getParameter("Departement"))).findFirst();
+			if(departement.isPresent()){
+				collabo.setDepartement(departement.get());
 			}
-			if (titre == null){
-				sB.append("\n le titre");
-			}
-			if (nom == null){
-				sB.append("\n le nom");
-			}
-			if (prenom == null){
-				sB.append("\n le prénom");
-			}
-		} else {
-			resp.setStatus(200);
-			resp.getWriter().write("<h1>Edition de collaborateur</h1>");
-			sB.append("matricule="+matricule+", titre="+titre+", nom="+nom+", prenom="+prenom);
+			collabo.setIntitulePoste(req.getParameter("Poste"));
+			collabo.setIban(req.getParameter("IBAN"));
+			collabo.setBic(req.getParameter("BIC"));
 		}
-		resp.getWriter().write("<p>"+sB.toString()+"</p>");
+		
+		
+		req.setAttribute("listCollabo", list);
+		req.getRequestDispatcher("/WEB-INF/views/collab/lister.jsp").forward(req, resp);
 	}
 }

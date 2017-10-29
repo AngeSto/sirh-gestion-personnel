@@ -21,7 +21,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
-<script src="<%=request.getContextPath()%>/js/nouveauJavaScript.js"></script>
+<script src="<%=request.getContextPath()%>/js/nouveauJavaScript.js" charset="UTF-8"></script>
 <script type="text/javascript">
 	var urlRoot ="<%=request.getContextPath()%>/";
 	init(urlRoot);
@@ -55,7 +55,7 @@
 	<header>
 		<h1>Nouveau Collaborateur</h1>
 	</header>
-	<form>
+	<form accept-charset="UTF-8">
 		<div class="form-group row">
 			<label for="inputNom" class="col-2 col-form-label offset-1">Nom</label>
 			<div class="col-5">

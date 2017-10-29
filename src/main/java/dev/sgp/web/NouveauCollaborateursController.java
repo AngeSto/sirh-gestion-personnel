@@ -37,4 +37,5 @@ public class NouveauCollaborateursController extends HttpServlet{
 		req.getRequestDispatcher("/WEB-INF/views/collab/lister.jsp").forward(req, resp);
 		}
 	}
+	
 }

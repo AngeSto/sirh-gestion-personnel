@@ -18,25 +18,31 @@ public class Collaborateur {
 	private ZonedDateTime dateCreation;
 	private String photo;
 	private boolean actif;
+	private String banque;
+	private String bic;
+	private String iban;
 	
 	private final String NON_RENSEIGNE="Non renseigné";
-	private Integer CPT = 0;
+	private static int cpt = 0;
 	
 	public Collaborateur(String nom, String prenom, String adresse, String numeroSecu, LocalDate dateNaissance) {
-		CPT++;
-		this.matricule = "M"+CPT;
+		cpt++;
+		this.matricule = "M"+cpt;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse = adresse;
 		this.numeroSecu = numeroSecu;
 		this.dateNaissance = dateNaissance;
+		this.departement=new Departement(NON_RENSEIGNE);
 		this.intitulePoste = NON_RENSEIGNE;
-		this.departement = new Departement(NON_RENSEIGNE);
 		this.telephone =NON_RENSEIGNE;
 		this.email=prenom+"."+nom+"@"+ResourceBundle.getBundle("application").getString("email_societe");;
 		this.dateCreation= ZonedDateTime.now();
 		this.photo="http://www.aovc.org/wp-content/uploads/2015/10/photo-%C3%A0-venir-400x369.jpg";
 		this.actif=true;
+		this.banque=NON_RENSEIGNE;
+		this.bic=NON_RENSEIGNE;
+		this.iban=NON_RENSEIGNE;
 	}
 	/**Getter for id
 	 * @return id
@@ -48,7 +54,7 @@ public class Collaborateur {
 	/**
 	 * @param matricule the id to set
 	 */
-	public void setMatricule(String id) {
+	public void setMatricule(String matricule) {
 		this.matricule = matricule;
 	}
 
@@ -216,6 +222,42 @@ public class Collaborateur {
 	 */
 	public void setActif(boolean actif) {
 		this.actif = actif;
+	}
+	/**Getter for banque
+	 * @return banque
+	 */
+	public String getBanque() {
+		return banque;
+	}
+	/**
+	 * @param banque the banque to set
+	 */
+	public void setBanque(String banque) {
+		this.banque = banque;
+	}
+	/**Getter for bic
+	 * @return bic
+	 */
+	public String getBic() {
+		return bic;
+	}
+	/**
+	 * @param bic the bic to set
+	 */
+	public void setBic(String bic) {
+		this.bic = bic;
+	}
+	/**Getter for iban
+	 * @return iban
+	 */
+	public String getIban() {
+		return iban;
+	}
+	/**
+	 * @param iban the iban to set
+	 */
+	public void setIban(String iban) {
+		this.iban = iban;
 	}
 	
 

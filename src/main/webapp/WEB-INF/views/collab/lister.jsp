@@ -115,7 +115,7 @@
 							<div class="media-body">
 								<div class="row">
 									<p class="col-5 font-weight-bold">Fonction</p>
-									<p class="col=7"><%=collabo.getFonction()%></p>
+									<p class="col=7"><%=collabo.getIntitulePoste()%></p>
 								</div>
 								<div class="row">
 									<p class="col-5 font-weight-bold">Departement</p>
@@ -130,7 +130,7 @@
 									<p class="col=7"><%=collabo.getTelephone()%></p>
 								</div>
 								<div class="row">
-									<a href="./creer.html" class="btn btn-primary offset-7 col-4">Editer</a>
+									<a href="./editer?matricule=<%=collabo.getMatricule()%>" class="btn btn-primary offset-7 col-4">Editer</a>
 								</div>
 							</div>
 						</div>
