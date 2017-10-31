@@ -23,6 +23,11 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
+<script src="<%=request.getContextPath()%>/js/listerJavaScript.js" charset="UTF-8"></script>
+<script type="text/javascript">
+	var urlRoot ="<%=request.getContextPath()%>/";
+	init(urlRoot);
+</script>
 </head>
 
 <body class="container-fluid">
@@ -72,7 +77,7 @@
 			<div class="col-3">
 				<div class="form-check mb-2 mb-md-0">
 					<label class="form-check-label"> <input
-						class="form-check-input" type="checkbox"> Voir les
+						class="form-check-input" id="CheckDesactif" type="checkbox" onclick="desactif()"> Voir les
 						collaborateurs désactivés
 					</label>
 				</div>
@@ -84,11 +89,12 @@
 					departement :</label>
 			</div>
 			<div class="col-2">
-				<select class="custom-select mb-3 col-2 mb-md-0" id="filtrer">
-					<option selected>Tous</option>
-					<option value="1">Comptabilité</option>
-					<option value="2">Ressources Humaines</option>
-					<option value="3">Informatique</option>
+				<select class="custom-select mb-3 col-2 mb-md-0" id="filtrer" onchange="filter(this.value)">
+					<option value="Tous" selected>Tous</option>
+					<option value="Comptabilité">Comptabilité</option>
+					<option value="Ressources Humaines">Ressources Humaines</option>
+					<option value="Informatique">Informatique</option>
+					<option value="Administratif">Administratif</option>
 				</select>
 			</div>
 		</div>
@@ -104,7 +110,7 @@
 			<%
 				}
 			%>
-			<div class="col-4">
+			<div class="col-4 collabo">
 				<div class="card">
 					<div class="card-header"><%=collabo.getNom() + " "%><%=collabo.getPrenom()%></div>
 					<div class="card-block">
@@ -115,20 +121,21 @@
 							<div class="media-body">
 								<div class="row">
 									<p class="col-5 font-weight-bold">Fonction</p>
-									<p class="col=7"><%=collabo.getIntitulePoste()%></p>
+									<p class="col-7"><%=collabo.getIntitulePoste()%></p>
 								</div>
 								<div class="row">
 									<p class="col-5 font-weight-bold">Departement</p>
-									<p class="col=7"><%=collabo.getDepartement()%></p>
+									<p class="col-7 departement"><%=collabo.getDepartement()%></p>
 								</div>
 								<div class="row">
 									<p class="col-5 font-weight-bold">Email</p>
-									<p class="col=7"><%=collabo.getEmail()%></p>
+									<p class="col-7"><%=collabo.getEmail()%></p>
 								</div>
 								<div class="row ">
 									<p class="col-5 font-weight-bold">Téléphone</p>
-									<p class="col=7"><%=collabo.getTelephone()%></p>
+									<p class="col-7"><%=collabo.getTelephone()%></p>
 								</div>
+								<p hidden class="desactif"><%=collabo.isActif()%></p>
 								<div class="row">
 									<a href="./editer?matricule=<%=collabo.getMatricule()%>" class="btn btn-primary offset-7 col-4">Editer</a>
 								</div>

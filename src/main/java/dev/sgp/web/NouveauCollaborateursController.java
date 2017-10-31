@@ -26,6 +26,8 @@ public class NouveauCollaborateursController extends HttpServlet{
 	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		req.setCharacterEncoding("UTF-8");
+		
 		if (req.getParameter("Nom")==null ||req.getParameter("Prenom")==null ||req.getParameter("DateNaissance")==null ||req.getParameter("Adresse")==null ||req.getParameter("NumeroSecu")==null){
 			resp.setStatus(400);
 			resp.getWriter().write("<h1>Un des champs n'est pas renseigné, tu as forcé mon JavaScript :-(</h1>");

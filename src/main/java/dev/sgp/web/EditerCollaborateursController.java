@@ -33,6 +33,8 @@ public class EditerCollaborateursController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("UTF-8");
 
 		List<Collaborateur> list = collaboService.listerCollabo();
 		List<Departement> listDepart = departService.listerDepartement();
@@ -48,6 +50,11 @@ public class EditerCollaborateursController extends HttpServlet {
 			collabo.setIntitulePoste(req.getParameter("Poste"));
 			collabo.setIban(req.getParameter("IBAN"));
 			collabo.setBic(req.getParameter("BIC"));
+			if (req.getParameter("Desactif")!=null){
+				collabo.setActif(false);
+			} else {
+				collabo.setActif(true);
+			}
 		}
 		
 		

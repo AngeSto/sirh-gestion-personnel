@@ -62,8 +62,7 @@
 			<input type="hidden"  name="Matricule" value="<%=collabo.getMatricule()%>">
 		<div class="col-3">
 			<div class="form-check mb-2 mb-md-0">
-				<label class="form-check-label"> <label
-					class="form-check-input" type="checkbox"> Désactivé </label>
+				<label class="form-check-label"><input name="Desactif" class="form-check-input" type="checkbox"<%if(!collabo.isActif()){%>checked<%} %>> Désactivé </label>
 			</div>
 		</div>
 	</header>
